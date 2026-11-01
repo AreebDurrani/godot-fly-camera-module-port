@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsjibhdqmklyg"]
+
+[ext_resource type="PackedScene" uid="uid://dmos2ffw84ciw" path="res://fly_camera.tscn" id="1_noarx"]
+[ext_resource type="PackedScene" uid="uid://bpky60opjdek2" path="res://platform.tscn" id="2_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://hbtxmwlidet6" path="res://jumper.tscn" id="3_a0tk4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_noarx"]
+sky_material = SubResource("ProceduralSkyMaterial_a202f")
+
+[sub_resource type="Environment" id="Environment_a0tk4"]
+background_mode = 2
+sky = SubResource("Sky_noarx")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_a0tk4"]
+rough = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a0tk4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="FlyCamera" parent="." instance=ExtResource("1_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7636, 3.31859, 0)
+
+[node name="platform" parent="." instance=ExtResource("2_a0tk4")]
+
+[node name="jumper" parent="." instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.48919, 0.461476, 0)
+physics_material_override = SubResource("PhysicsMaterial_a0tk4")
+can_sleep = false
